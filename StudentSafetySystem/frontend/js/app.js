@@ -1,4 +1,4 @@
-const API = "https://saferoute-api-hpjf.onrender.com";
+const API = "https://saferoute-api-hpjf.onrender.com/api";
 let data={buses:[],students:[],events:[],routes:[],notifications:[],incidents:[],stats:{},system:{}};
 let automationTimer=null, refreshTimer=null, selectedStudent=null, journeyTimer=null;
 const titles={overview:["AUTONOMOUS OPERATIONS","Command Center"],fleet:["FLEET OPERATIONS / 02","Fleet Management"],students:["IDENTITY & ACCOUNTABILITY / 03","Student Management"],rfid:["IDENTITY GATEWAY / 04","RFID & Boarding"],cellular:["NON-SATELLITE POSITIONING / 05","Cellular Intelligence"],routes:["ROUTE INTELLIGENCE / 06","Routes & Stops"],eta:["PREDICTIVE ARRIVAL / 07","ETA Intelligence"],safety:["PROTECTION LAYER / 08","Safety Center"],notifications:["COMMUNICATIONS / 09","Notification Center"],parent:["PARENT EXPERIENCE / 10","Parent Portal"],incidents:["EXCEPTION MANAGEMENT / 11","Incident Command"],trips:["AUDITABLE JOURNEYS / 12","Trip Replay"],analytics:["OPERATIONS INTELLIGENCE / 13","Analytics"],health:["PLATFORM STATUS / 14","System Health"],reports:["AUTOMATIC DOCUMENTATION / 15","Reports"]};
@@ -11,7 +11,52 @@ document.querySelectorAll(".nav-item").forEach(b=>b.addEventListener("click",()=
 $("mobileMenu")?.addEventListener("click",()=>$("sidebar")?.classList.toggle("open"));
 function clock(){setText("liveClock",new Date().toLocaleTimeString([], {hour12:false}))}clock();setInterval(clock,1000);
 function eventHtml(e){const sev=(e.severity||"INFO").toUpperCase();return `<div class="event-row"><b>${esc(e.title)}</b><small>${esc(e.detail||"Automated system event")}</small><div class="event-meta"><span>${esc(e.kind||"SYSTEM")}</span><span>•</span><span>${sev}</span></div></div>`}
-async function load(){try{const r=await fetch(API+"/dashboard/",{cache:"no-store"});if(!r.ok)throw new Error("API "+r.status);data=await r.json();setText("apiStatus","ONLINE");$("apiDot")?.classList.add("online");render()}catch(e){setText("apiStatus","OFFLINE");$("apiDot")?.classList.remove("online");}}
+
+async function load() {
+    try {
+        const response = await fetch(`${API}/dashboard/`, {
+            cache: "no-store"
+        });
+
+        if (!response.ok) {
+            throw new Error(`Dashboard API error: ${response.status}`);
+        }
+
+        const result = await response.json();
+
+        data = {
+            ...data,
+            ...result,
+            buses: Array.isArray(result.buses) ? result.buses : [],
+            students: Array.isArray(result.students) ? result.students : [],
+            events: Array.isArray(result.events) ? result.events : [],
+            routes: Array.isArray(result.routes) ? result.routes : [],
+            notifications: Array.isArray(result.notifications)
+                ? result.notifications
+                : [],
+            incidents: Array.isArray(result.incidents)
+                ? result.incidents
+                : [],
+            stats: result.stats || {},
+            system: result.system || {}
+        };
+
+        setText("apiStatus", "ONLINE");
+        $("apiDot")?.classList.add("online");
+
+        render();
+
+        console.log("Dashboard loaded:", data);
+        console.log("Student records:", data.students.length);
+
+    } catch (error) {
+        setText("apiStatus", "OFFLINE");
+        $("apiDot")?.classList.remove("online");
+
+        console.error("SafeRoute API error:", error);
+    }
+}
+
 function render(){const s=data.stats||{};setText("sBuses",s.active_buses??0);setText("sStudents",s.students??0);setText("sSafe",s.safe_students??0);setText("sRoutes",s.routes??0);setText("sAlerts",s.alerts??0);setText("fleetHealth",Math.round(s.on_time||94)+"%");setText("fleetOnRoute",data.buses.filter(b=>b.status==="ACTIVE").length);setText("fleetAvgEta",data.buses.length?Math.round(data.buses.reduce((a,b)=>a+(+b.eta_minutes||0),0)/data.buses.length)+"m":"—");setText("cellTransitions",Math.max(10,data.buses.length*3));renderBusList();renderEvents();renderFleet();renderStudents();renderRfid();renderCellular();renderRoutes();renderEta();renderSafety();renderNotifications();renderIncidents();updateJourney()}
 function renderBusList(){const box=$("busList");if(!box)return;box.innerHTML=data.buses.slice(0,6).map(b=>`<div class="bus-row"><div><div class="bus-code">${esc(b.code)}</div><div class="bus-route">${esc(b.route_name)}</div></div><div class="bus-middle"><div class="bus-stops"><span>${esc(b.current_stop)}</span><span>${esc(b.next_stop)}</span></div><div class="mini-progress"><i style="width:${Math.max(5,Math.min(100,b.progress||5))}%"></i></div></div><div class="bus-eta">${esc(b.eta_minutes)}<small>MIN ETA</small></div></div>`).join("")||`<div class="empty">Waiting for fleet data…</div>`}
 function renderEvents(){const box=$("events");if(box)box.innerHTML=data.events.slice(0,12).map(eventHtml).join("")||`<div class="empty">Automation will create events here.</div>`}
