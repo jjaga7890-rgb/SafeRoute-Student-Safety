@@ -1,4 +1,4 @@
-const API = "http://127.0.0.1:8000/api";
+const API = "https://saferoute-api-hpjf.onrender.com";
 let data={buses:[],students:[],events:[],routes:[],notifications:[],incidents:[],stats:{},system:{}};
 let automationTimer=null, refreshTimer=null, selectedStudent=null, journeyTimer=null;
 const titles={overview:["AUTONOMOUS OPERATIONS","Command Center"],fleet:["FLEET OPERATIONS / 02","Fleet Management"],students:["IDENTITY & ACCOUNTABILITY / 03","Student Management"],rfid:["IDENTITY GATEWAY / 04","RFID & Boarding"],cellular:["NON-SATELLITE POSITIONING / 05","Cellular Intelligence"],routes:["ROUTE INTELLIGENCE / 06","Routes & Stops"],eta:["PREDICTIVE ARRIVAL / 07","ETA Intelligence"],safety:["PROTECTION LAYER / 08","Safety Center"],notifications:["COMMUNICATIONS / 09","Notification Center"],parent:["PARENT EXPERIENCE / 10","Parent Portal"],incidents:["EXCEPTION MANAGEMENT / 11","Incident Command"],trips:["AUDITABLE JOURNEYS / 12","Trip Replay"],analytics:["OPERATIONS INTELLIGENCE / 13","Analytics"],health:["PLATFORM STATUS / 14","System Health"],reports:["AUTOMATIC DOCUMENTATION / 15","Reports"]};
