@@ -1,3 +1,4 @@
+```python
 import os
 from pathlib import Path
 
@@ -5,7 +6,10 @@ import dj_database_url
 
 BASE_DIR = Path(__file__).resolve().parent.parent
 
-# Security
+# =========================================================
+# SECURITY SETTINGS
+# =========================================================
+
 SECRET_KEY = os.environ.get(
     "SECRET_KEY",
     "dev-only-key-for-local-development"
@@ -13,7 +17,10 @@ SECRET_KEY = os.environ.get(
 
 DEBUG = os.environ.get("DEBUG", "True").lower() == "true"
 
-# Hosts allowed to access Django
+# =========================================================
+# ALLOWED HOSTS
+# =========================================================
+
 ALLOWED_HOSTS = [
     host.strip()
     for host in os.environ.get(
@@ -23,7 +30,10 @@ ALLOWED_HOSTS = [
     if host.strip()
 ]
 
-# Applications
+# =========================================================
+# APPLICATIONS
+# =========================================================
+
 INSTALLED_APPS = [
     "django.contrib.admin",
     "django.contrib.auth",
@@ -36,7 +46,10 @@ INSTALLED_APPS = [
     "core",
 ]
 
-# Middleware
+# =========================================================
+# MIDDLEWARE
+# =========================================================
+
 MIDDLEWARE = [
     "corsheaders.middleware.CorsMiddleware",
     "django.middleware.security.SecurityMiddleware",
@@ -49,6 +62,10 @@ MIDDLEWARE = [
 ]
 
 ROOT_URLCONF = "config.urls"
+
+# =========================================================
+# TEMPLATES
+# =========================================================
 
 TEMPLATES = [
     {
@@ -67,15 +84,17 @@ TEMPLATES = [
 
 WSGI_APPLICATION = "config.wsgi.application"
 
-# Database:
-# Use PostgreSQL when DATABASE_URL is configured.
-# Otherwise, use SQLite for local development.
+# =========================================================
+# DATABASE
+# PostgreSQL on Render; SQLite for local development.
+# =========================================================
+
 DATABASE_URL = os.environ.get("DATABASE_URL")
 
 if DATABASE_URL:
     DATABASES = {
-        "default": dj_database_url.parse(
-            DATABASE_URL,
+        "default": dj_database_url.config(
+            default=DATABASE_URL,
             conn_max_age=600,
             ssl_require=not DEBUG,
         )
@@ -88,14 +107,25 @@ else:
         }
     }
 
+# =========================================================
+# PASSWORD VALIDATION
+# =========================================================
+
 AUTH_PASSWORD_VALIDATORS = []
+
+# =========================================================
+# INTERNATIONALIZATION
+# =========================================================
 
 LANGUAGE_CODE = "en-us"
 TIME_ZONE = "Asia/Kolkata"
 USE_I18N = True
 USE_TZ = True
 
-# Static files
+# =========================================================
+# STATIC FILES
+# =========================================================
+
 STATIC_URL = "/static/"
 STATIC_ROOT = BASE_DIR / "staticfiles"
 
@@ -112,22 +142,49 @@ STORAGES = {
 
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
-# CORS: configure the frontend domain in Render later.
+# =========================================================
+# CORS
+# Allow the deployed frontend and local development frontend.
+# =========================================================
+
 CORS_ALLOWED_ORIGINS = [
-    origin.strip()
-    for origin in os.environ.get("CORS_ALLOWED_ORIGINS", "").split(",")
-    if origin.strip()
+    "https://saferoute-frontend-bplk.onrender.com",
+    "http://127.0.0.1:5500",
+    "http://localhost:5500",
 ]
 
-# REST API permissions (preserved from your original settings).
+# Allow additional origins configured through Render.
+additional_origins = os.environ.get(
+    "CORS_ALLOWED_ORIGINS", ""
+)
+
+CORS_ALLOWED_ORIGINS.extend(
+    origin.strip().rstrip("/")
+    for origin in additional_origins.split(",")
+    if origin.strip()
+    and origin.strip().rstrip("/") not in CORS_ALLOWED_ORIGINS
+)
+
+# =========================================================
+# DJANGO REST FRAMEWORK
+# =========================================================
+
 REST_FRAMEWORK = {
     "DEFAULT_PERMISSION_CLASSES": [
         "rest_framework.permissions.AllowAny",
     ],
 }
 
-# HTTPS and proxy settings for production hosting
+# =========================================================
+# PRODUCTION SECURITY
+# =========================================================
+
 if not DEBUG:
-    SECURE_PROXY_SSL_HEADER = ("HTTP_X_FORWARDED_PROTO", "https")
+    SECURE_PROXY_SSL_HEADER = (
+        "HTTP_X_FORWARDED_PROTO",
+        "https",
+    )
+
     SESSION_COOKIE_SECURE = True
     CSRF_COOKIE_SECURE = True
+```
