@@ -1,0 +1,1 @@
+RFID ingestion adapter and validation module.

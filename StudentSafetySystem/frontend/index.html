@@ -1,0 +1,140 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#0b0716">
+<title>SafeRoute • Student Safety OS</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Manrope:wght@400;500;600;700;800&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+<div class="app-shell">
+  <aside class="sidebar" id="sidebar">
+    <div class="brand">
+      <div class="brand-mark" aria-hidden="true"><span></span><span></span><span></span></div>
+      <div class="brand-copy"><strong>SafeRoute</strong><small>STUDENT SAFETY OS</small></div>
+    </div>
+    <div class="mode-card"><span class="live-dot"></span><div><b>AUTONOMOUS MODE</b><small>RFID · CELLULAR · AI</small></div><span class="mode-live">LIVE</span></div>
+    <div class="nav-label">OPERATIONS</div>
+    <nav class="nav" id="nav">
+      <button class="nav-item active" data-view="overview"><span class="nav-icon">⌂</span><span>Command Center</span><em>01</em></button>
+      <button class="nav-item" data-view="fleet"><span class="nav-icon">▣</span><span>Fleet Management</span><em>02</em></button>
+      <button class="nav-item" data-view="students"><span class="nav-icon">♙</span><span>Students</span><em>03</em></button>
+      <button class="nav-item" data-view="rfid"><span class="nav-icon">◈</span><span>RFID & Boarding</span><em>04</em></button>
+      <button class="nav-item" data-view="cellular"><span class="nav-icon">◉</span><span>Cellular Intelligence</span><em>05</em></button>
+      <button class="nav-item" data-view="routes"><span class="nav-icon">⌁</span><span>Routes & Stops</span><em>06</em></button>
+      <button class="nav-item" data-view="eta"><span class="nav-icon">◷</span><span>ETA Intelligence</span><em>07</em></button>
+      <button class="nav-item" data-view="safety"><span class="nav-icon">△</span><span>Safety Center</span><em>08</em></button>
+      <button class="nav-item" data-view="notifications"><span class="nav-icon">◇</span><span>Notifications</span><em>09</em></button>
+      <button class="nav-item" data-view="parent"><span class="nav-icon">♧</span><span>Parent Portal</span><em>10</em></button>
+      <button class="nav-item" data-view="incidents"><span class="nav-icon">!</span><span>Incidents</span><em>11</em></button>
+      <button class="nav-item" data-view="trips"><span class="nav-icon">↺</span><span>Trip Replay</span><em>12</em></button>
+      <button class="nav-item" data-view="analytics"><span class="nav-icon">◒</span><span>Analytics</span><em>13</em></button>
+      <button class="nav-item" data-view="health"><span class="nav-icon">⚙</span><span>System Health</span><em>14</em></button>
+      <button class="nav-item" data-view="reports"><span class="nav-icon">▤</span><span>Reports</span><em>15</em></button>
+    </nav>
+    <div class="sidebar-bottom">
+      <div class="secure-badge"><span>✓</span><div><b>HARDWARE READY</b><small>Simulation layer active</small></div></div>
+      <small class="sidebar-note">Designed for school transport operations. Cellular positioning is approximate and demo-simulated.</small>
+    </div>
+  </aside>
+
+  <main class="main">
+    <header class="topbar">
+      <button class="mobile-menu" id="mobileMenu">☰</button>
+      <div class="top-title"><span class="eyebrow" id="eyebrow">AUTONOMOUS OPERATIONS</span><h1 id="pageTitle">Command Center</h1></div>
+      <div class="top-actions">
+        <div class="system-chip"><span class="status-dot" id="apiDot"></span><div><small>BACKEND</small><b id="apiStatus">Connecting</b></div></div>
+        <div class="clock-chip"><small>LOCAL TIME</small><b id="liveClock">--:--:--</b></div>
+        <button id="autoBtn" class="primary-btn"><span>▶</span> Start Automation</button>
+      </div>
+    </header>
+
+    <div class="content">
+      <section id="view-overview" class="view active">
+        <div class="command-hero">
+          <div class="hero-copy">
+            <div class="eyebrow">LIVE SCHOOL TRANSPORT NETWORK</div>
+            <h2>Every student.<br><span>Every trip.</span><br><i>Automatically protected.</i></h2>
+            <p>One connected safety workflow linking RFID identity, cellular positioning, route intelligence, ETA prediction, accountability and parent communication.</p>
+            <div class="hero-actions"><button class="primary-btn" onclick="showView('fleet')">Open Fleet Control <span>→</span></button><button class="ghost-btn" onclick="showView('safety')">Safety Center</button></div>
+            <div class="signal-line"><span class="signal active"></span><b>NETWORK STABLE</b><span>•</span><span>15 operational modules</span><span>•</span><span>Automatic cycle every 3.5s</span></div>
+          </div>
+          <div class="hero-visual">
+            <div class="orb orb-a"></div><div class="orb orb-b"></div>
+            <div class="core-ring"><div class="core-center">SR<span>AI</span></div></div>
+            <div class="orbit orbit-1"><span>RFID</span></div><div class="orbit orbit-2"><span>GSM</span></div><div class="orbit orbit-3"><span>ETA</span></div>
+            <div class="visual-caption"><b>SAFE ROUTE ENGINE</b><span>Identity → Location → Safety</span></div>
+          </div>
+        </div>
+
+        <div class="kpi-grid">
+          <div class="kpi-card"><div class="kpi-top"><span>ACTIVE BUSES</span><i>FLEET</i></div><strong id="sBuses">—</strong><div class="kpi-bottom"><span class="up">● LIVE</span><small>fleet online</small></div></div>
+          <div class="kpi-card"><div class="kpi-top"><span>STUDENTS</span><i>IDENTITY</i></div><strong id="sStudents">—</strong><div class="kpi-bottom"><span class="up">● TRACKED</span><small>today</small></div></div>
+          <div class="kpi-card"><div class="kpi-top"><span>ACCOUNTED</span><i>SAFETY</i></div><strong id="sSafe">—</strong><div class="kpi-bottom"><span class="up">● VERIFIED</span><small>journey status</small></div></div>
+          <div class="kpi-card"><div class="kpi-top"><span>ROUTES</span><i>NETWORK</i></div><strong id="sRoutes">—</strong><div class="kpi-bottom"><span class="up">● ACTIVE</span><small>school network</small></div></div>
+          <div class="kpi-card"><div class="kpi-top"><span>ALERTS</span><i>WATCH</i></div><strong id="sAlerts">—</strong><div class="kpi-bottom"><span class="warn">● MONITOR</span><small>requiring attention</small></div></div>
+        </div>
+
+        <div class="section-heading"><div><span class="eyebrow">AUTOMATED PIPELINE</span><h3>Trip intelligence — live workflow</h3></div><span class="live-pill"><span></span> RUNNING</span></div>
+        <div class="pipeline panel">
+          <div class="pipeline-step done"><b>01</b><div><strong>Trip Start</strong><small>Schedule detected</small></div></div><div class="pipeline-line"></div>
+          <div class="pipeline-step done"><b>02</b><div><strong>RFID</strong><small>Identity verified</small></div></div><div class="pipeline-line"></div>
+          <div class="pipeline-step done"><b>03</b><div><strong>Cellular</strong><small>Position estimated</small></div></div><div class="pipeline-line"></div>
+          <div class="pipeline-step done"><b>04</b><div><strong>Route</strong><small>Progress matched</small></div></div><div class="pipeline-line"></div>
+          <div class="pipeline-step done"><b>05</b><div><strong>ETA</strong><small>Prediction updated</small></div></div><div class="pipeline-line"></div>
+          <div class="pipeline-step done"><b>06</b><div><strong>Safety</strong><small>Checks completed</small></div></div><div class="pipeline-line"></div>
+          <div class="pipeline-step active"><b>07</b><div><strong>Notify</strong><small>Parents informed</small></div></div>
+        </div>
+
+        <div class="dashboard-grid">
+          <div class="panel large-panel"><div class="panel-header"><div><span class="eyebrow">FLEET SNAPSHOT</span><h3>Live fleet</h3></div><button class="link-btn" onclick="showView('fleet')">View all →</button></div><div id="busList" class="bus-list"></div></div>
+          <div class="panel large-panel"><div class="panel-header"><div><span class="eyebrow">EVENT ENGINE</span><h3>Automatic event stream</h3></div><span class="live-pill"><span></span> LIVE</span></div><div id="events" class="event-stream"></div></div>
+        </div>
+      </section>
+
+      <section id="view-fleet" class="view">
+        <div class="section-intro"><div><span class="eyebrow">FLEET OPERATIONS / 02</span><h2>Fleet Management</h2><p>Command every vehicle, route, driver, cellular link and safety state from one operational console.</p></div><div class="intro-actions"><span class="status-badge success">● 10 BUSES ONLINE</span><button class="primary-btn" onclick="runCycle()">Refresh Fleet ↻</button></div></div>
+        <div class="fleet-overview"><div class="fleet-summary panel"><span>FLEET HEALTH</span><strong id="fleetHealth">98%</strong><div class="health-bar"><i style="width:98%"></i></div><small>All critical vehicle systems nominal</small></div><div class="fleet-summary panel"><span>ON ROUTE</span><strong id="fleetOnRoute">10</strong><small>vehicles actively progressing</small></div><div class="fleet-summary panel"><span>AVG ETA</span><strong id="fleetAvgEta">—</strong><small>minutes to next stop</small></div><div class="fleet-summary panel"><span>CELLULAR LINKS</span><strong id="fleetCellLinks">10/10</strong><small>serving-cell telemetry</small></div></div>
+        <div id="fleetGrid" class="fleet-grid"></div>
+      </section>
+
+      <section id="view-students" class="view">
+        <div class="section-intro"><div><span class="eyebrow">IDENTITY & ACCOUNTABILITY / 03</span><h2>Student Management</h2><p>Search verified student identities and follow each journey from RFID scan to arrival.</p></div><div class="intro-actions"><span id="studentCount" class="status-badge">100 registered</span></div></div>
+        <div class="toolbar panel"><div class="search-box"><span>⌕</span><input id="studentSearch" placeholder="Search by student name, grade or RFID UID…"></div><div class="filter-chips"><span class="filter-chip active">All</span><span class="filter-chip">On Bus</span><span class="filter-chip">Waiting</span><span class="filter-chip">Arrived</span></div></div>
+        <div id="studentGrid" class="student-grid"></div>
+        <div id="studentJourneyPanel" class="journey-panel panel hidden"></div>
+      </section>
+
+      <section id="view-rfid" class="view">
+        <div class="section-intro"><div><span class="eyebrow">IDENTITY GATEWAY / 04</span><h2>RFID & Boarding Intelligence</h2><p>Every scan becomes an accountable journey event — identity, bus, boarding and exit.</p></div><span class="status-badge success">● GATEWAY NETWORK READY</span></div>
+        <div class="rfid-dashboard"><div class="rfid-reader panel"><div class="reader-visual"><div class="rfid-core">RFID</div><div class="rfid-wave w1"></div><div class="rfid-wave w2"></div><div class="rfid-wave w3"></div></div><div><span class="eyebrow">GATEWAY STATUS</span><h3>Identity gateway online</h3><p>Listening for automatic card events across the school transport network.</p><div class="reader-status"><span class="live-dot"></span> 10/10 gateways ready</div></div></div><div class="scan-card panel"><span class="eyebrow">LATEST VERIFIED EVENT</span><h3 id="rfidLatest">Waiting for next automated scan…</h3><div class="scan-flow"><span>UID</span><i>→</i><span>IDENTITY</span><i>→</i><span>BUS</span><i>→</i><span>STATUS</span></div><small>All demo scans are generated automatically by the simulator.</small></div></div>
+        <div class="metric-grid"><div class="metric-card"><span>RECOGNITION RATE</span><strong>99.2%</strong><small>RFID identity verification</small></div><div class="metric-card"><span>REGISTERED CARDS</span><strong>100</strong><small>student identities</small></div><div class="metric-card"><span>GATEWAYS READY</span><strong>10/10</strong><small>vehicle readers</small></div><div class="metric-card"><span>LAST EVENT</span><strong id="rfidLastTime">LIVE</strong><small>automatically refreshed</small></div></div>
+        <div class="panel"><div class="panel-header"><div><span class="eyebrow">EVENT LOG</span><h3>Recent RFID activity</h3></div></div><div id="rfidEvents" class="event-stream"></div></div>
+      </section>
+
+      <section id="view-cellular" class="view">
+        <div class="section-intro"><div><span class="eyebrow">NON-SATELLITE POSITIONING / 05</span><h2>Cellular Intelligence</h2><p>Approximate location estimation from serving-cell and neighboring-cell observations. This demo is not GPS.</p></div><span class="status-badge success">● LTE / GSM LINK ACTIVE</span></div>
+        <div class="cellular-layout"><div class="cell-map panel"><div class="map-grid"></div><div class="road r1"></div><div class="road r2"></div><div class="road r3"></div><div class="tower t1"><b>◉</b><span>CELL-221</span></div><div class="tower t2"><b>◉</b><span>CELL-547</span></div><div class="tower t3"><b>◉</b><span>CELL-803</span></div><div class="cell-bus cb1">SB-101</div><div class="cell-bus cb2">SB-104</div><div class="cell-bus cb3">SB-108</div><div class="map-center">SCHOOL<br><small>SAFE ZONE</small></div><div class="map-note">SIMULATED CELLULAR POSITION • APPROXIMATE</div></div><div class="cell-side"><div class="panel cell-status"><span class="eyebrow">NETWORK INTELLIGENCE</span><div class="cell-stat"><span>Serving cell</span><b id="servingCell">SIM-CELL-101</b></div><div class="cell-stat"><span>Signal</span><b id="networkSignal">−67 dBm</b></div><div class="cell-stat"><span>Confidence</span><b id="networkConfidence">93%</b></div><div class="cell-stat"><span>Transitions</span><b id="cellTransitions">—</b></div><div class="confidence"><i id="confidenceBar" style="width:93%"></i></div></div><div class="panel neighbor-panel"><span class="eyebrow">NEIGHBOR CELLS</span><div class="neighbor"><span>CELL-547</span><b>−71 dBm</b></div><div class="neighbor"><span>CELL-803</span><b>−76 dBm</b></div><div class="neighbor"><span>CELL-119</span><b>−82 dBm</b></div></div></div></div>
+      </section>
+
+      <section id="view-routes" class="view"><div class="section-intro"><div><span class="eyebrow">ROUTE INTELLIGENCE / 06</span><h2>Routes & Stops</h2><p>Five operational corridors with automatic stop progression and route matching.</p></div></div><div id="routeGrid" class="route-grid"></div></section>
+      <section id="view-eta" class="view"><div class="section-intro"><div><span class="eyebrow">PREDICTIVE ARRIVAL / 07</span><h2>ETA Intelligence</h2><p>Arrival predictions update from route progress, cellular movement and current bus state.</p></div><span class="status-badge success">● PREDICTION ENGINE ACTIVE</span></div><div class="eta-banner panel"><div><span class="eyebrow">NETWORK FORECAST</span><h3>Live arrival intelligence</h3><p>Confidence improves as each bus reports new movement and cell observations.</p></div><div class="forecast"><b>94%</b><span>network on-time score</span></div></div><div id="etaGrid" class="eta-grid"></div></section>
+      <section id="view-safety" class="view"><div class="section-intro"><div><span class="eyebrow">PROTECTION LAYER / 08</span><h2>Safety Center</h2><p>Automated checks for identity, accountability, route continuity, connectivity and exception handling.</p></div><span class="status-badge success">● ALL CORE CHECKS ACTIVE</span></div><div class="safety-overview"><div class="safety-score panel"><span class="eyebrow">LIVE SAFETY SCORE</span><strong id="safetyScore">98</strong><small>/ 100 operational confidence</small><div class="score-ring"><span>SAFE</span></div></div><div class="safety-checks"><div class="check-card"><span>✓</span><div><b>Identity verification</b><small>RFID validation active</small></div><em>PASS</em></div><div class="check-card"><span>✓</span><div><b>Student accountability</b><small>Expected vs detected</small></div><em>PASS</em></div><div class="check-card"><span>✓</span><div><b>Route monitoring</b><small>Deviation rules active</small></div><em>PASS</em></div><div class="check-card"><span>✓</span><div><b>Network resilience</b><small>Recovery monitoring active</small></div><em>PASS</em></div></div></div><div class="panel safety-process"><div class="panel-header"><div><span class="eyebrow">AUTOMATED RESPONSE</span><h3>Safety workflow</h3></div><span class="live-pill"><span></span> AUTOMATIC</span></div><div class="response-flow"><span>DETECT</span><i>→</i><span>VERIFY</span><i>→</i><span>ASSESS</span><i>→</i><span>ALERT</span><i>→</i><span>RESOLVE</span></div></div><div class="panel"><div class="panel-header"><div><span class="eyebrow">EVENT MONITOR</span><h3>Latest safety events</h3></div></div><div id="safetyEvents" class="event-stream"></div></div></section>
+      <section id="view-notifications" class="view"><div class="section-intro"><div><span class="eyebrow">COMMUNICATIONS / 09</span><h2>Notification Center</h2><p>Automatic parent and school updates generated from verified journey events.</p></div></div><div class="notification-summary"><div class="metric-card"><span>SENT TODAY</span><strong>248</strong><small>automatic updates</small></div><div class="metric-card"><span>DELIVERY RATE</span><strong>99.4%</strong><small>successful delivery</small></div><div class="metric-card"><span>ACTIVE RULES</span><strong>12</strong><small>notification triggers</small></div></div><div id="notificationGrid" class="notification-grid"></div></section>
+      <section id="view-parent" class="view"><div class="section-intro"><div><span class="eyebrow">PARENT EXPERIENCE / 10</span><h2>Parent Portal</h2><p>A simplified journey view for families following a student's bus.</p></div></div><div class="parent-hero panel"><div class="parent-avatar">AK</div><div class="parent-main"><span class="eyebrow">CHILD JOURNEY</span><h3>Ananya Kumar</h3><p>Grade 8-A · RFID-1015 · Bus SB-106</p><div class="parent-state"><span></span> Currently travelling safely</div></div><div class="parent-next"><small>NEXT STOP</small><b>Green Park</b><strong>08 min</strong><span>ETA prediction</span></div></div><div class="journey-timeline panel"><div class="timeline-node done"><span>✓</span><div><b>Boarding confirmed</b><small>RFID verified automatically</small></div><time>08:12</time></div><div class="timeline-node done"><span>✓</span><div><b>Identity verified</b><small>Student matched to assigned bus</small></div><time>08:12</time></div><div class="timeline-node active"><span>●</span><div><b>Bus moving</b><small>Cellular position updated</small></div><time>LIVE</time></div><div class="timeline-node"><span>○</span><div><b>Arrival at stop</b><small>Waiting for route progression</small></div><time>—</time></div></div></section>
+      <section id="view-incidents" class="view"><div class="section-intro"><div><span class="eyebrow">EXCEPTION MANAGEMENT / 11</span><h2>Incident Command</h2><p>Track anomalies, recovery events and accountability exceptions.</p></div><span class="status-badge">2 monitored events</span></div><div class="incident-banner panel"><div class="incident-icon">!</div><div><b>Incident monitoring is active</b><p>All incoming safety events are classified automatically by severity.</p></div><span class="status-badge success">● WATCHING</span></div><div id="incidentGrid" class="incident-grid"></div></section>
+      <section id="view-trips" class="view"><div class="section-intro"><div><span class="eyebrow">AUDITABLE JOURNEYS / 12</span><h2>Trip Replay</h2><p>Replayable journey records for operational review and safety auditing.</p></div></div><div class="replay panel"><div class="replay-header"><div><span class="eyebrow">TODAY / ACTIVE NETWORK</span><h3>Morning transport cycle</h3></div><span class="status-badge success">● COMPLETED 94%</span></div><div class="replay-track"><span class="point done"></span><span class="track-line"></span><span class="point done"></span><span class="track-line"></span><span class="point done"></span><span class="track-line"></span><span class="point active"></span><span class="track-line"></span><span class="point"></span></div><div class="replay-labels"><span>Depot</span><span>Boarding</span><span>Mid-route</span><span>Current</span><span>School</span></div><div class="replay-controls"><button class="ghost-btn">◀</button><button class="primary-btn">▶ Play Journey</button><button class="ghost-btn">▶▶</button><span>Speed 1×</span></div></div></section>
+      <section id="view-analytics" class="view"><div class="section-intro"><div><span class="eyebrow">OPERATIONS INTELLIGENCE / 13</span><h2>Analytics</h2><p>High-level operational signals from fleet, identity, routes and safety.</p></div></div><div class="analytics-grid"><div class="chart-card panel"><div class="panel-header"><div><span class="eyebrow">FLEET UTILIZATION</span><h3>Morning network activity</h3></div><b>+12.8%</b></div><div class="bar-chart"><i style="height:44%"></i><i style="height:58%"></i><i style="height:72%"></i><i style="height:66%"></i><i style="height:86%"></i><i style="height:74%"></i><i style="height:92%"></i><i style="height:79%"></i><i style="height:88%"></i><i style="height:95%"></i></div><div class="chart-axis"><span>06:30</span><span>07:00</span><span>07:30</span><span>08:00</span><span>08:30</span></div></div><div class="chart-card panel"><div class="panel-header"><div><span class="eyebrow">SAFETY MIX</span><h3>Operational status</h3></div></div><div class="donut"><div><b>98%</b><span>safe</span></div></div><div class="legend"><span><i class="safe-dot"></i> Normal 94%</span><span><i class="warn-dot"></i> Watch 5%</span><span><i class="danger-dot"></i> Critical 1%</span></div></div><div class="analytics-stats"><div><span>AVG BOARDING</span><b>1.8s</b><small>RFID verification</small></div><div><span>AVG ETA ERROR</span><b>±2.4m</b><small>prediction accuracy</small></div><div><span>ROUTE COMPLIANCE</span><b>97.6%</b><small>network wide</small></div><div><span>PARENT DELIVERY</span><b>99.4%</b><small>notification success</small></div></div></div></section>
+      <section id="view-health" class="view"><div class="section-intro"><div><span class="eyebrow">PLATFORM STATUS / 14</span><h2>System Health</h2><p>Infrastructure and integration readiness across the SafeRoute platform.</p></div><span class="status-badge success">● SYSTEM HEALTHY</span></div><div class="health-grid"><div class="health-card panel"><div class="health-icon">API</div><b>Backend API</b><strong>ONLINE</strong><small>Django REST service</small><div class="health-line"><i style="width:99%"></i></div></div><div class="health-card panel"><div class="health-icon">DB</div><b>Database</b><strong>HEALTHY</strong><small>SQLite operational store</small><div class="health-line"><i style="width:98%"></i></div></div><div class="health-card panel"><div class="health-icon">RF</div><b>RFID Gateway</b><strong>READY</strong><small>10 simulated gateways</small><div class="health-line"><i style="width:100%"></i></div></div><div class="health-card panel"><div class="health-icon">GS</div><b>Cellular Layer</b><strong>CONNECTED</strong><small>Serving-cell telemetry</small><div class="health-line"><i style="width:96%"></i></div></div></div><div class="panel health-log"><div class="panel-header"><div><span class="eyebrow">SYSTEM LOG</span><h3>Service status</h3></div></div><div class="log-row"><span class="ok">●</span><b>API Gateway</b><small>Response within normal threshold</small><time>LIVE</time></div><div class="log-row"><span class="ok">●</span><b>Automation Engine</b><small>Cycle scheduler running</small><time>3.5s</time></div><div class="log-row"><span class="ok">●</span><b>Event Stream</b><small>RFID / location / safety events flowing</small><time>LIVE</time></div><div class="log-row"><span class="ok">●</span><b>Notification Layer</b><small>Delivery abstraction ready</small><time>READY</time></div></div></section>
+      <section id="view-reports" class="view"><div class="section-intro"><div><span class="eyebrow">AUTOMATIC DOCUMENTATION / 15</span><h2>Reports</h2><p>Operational summaries prepared from the live SafeRoute data stream.</p></div></div><div class="report-grid"><div class="report-card panel"><div class="report-icon">▤</div><div><span>DAILY</span><h3>Transport Operations</h3><p>Fleet activity, boarding, ETA and route summary.</p></div><button class="primary-btn" onclick="toast('Daily report prepared')">Generate</button></div><div class="report-card panel"><div class="report-icon">△</div><div><span>SAFETY</span><h3>Safety Audit</h3><p>Identity checks, incidents and accountability status.</p></div><button class="primary-btn" onclick="toast('Safety audit prepared')">Generate</button></div><div class="report-card panel"><div class="report-icon">◒</div><div><span>ANALYTICS</span><h3>Network Performance</h3><p>Utilization, ETA accuracy and notification delivery.</p></div><button class="primary-btn" onclick="toast('Performance report prepared')">Generate</button></div></div></section>
+    </div>
+  </main>
+</div>
+<div id="toast" class="toast"></div>
+<script src="js/app.js"></script>
+</body>
+</html>

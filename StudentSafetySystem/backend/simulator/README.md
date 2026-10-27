@@ -1,0 +1,1 @@
+Automatic simulator; dashboard triggers cycles through /api/automation/cycle/.

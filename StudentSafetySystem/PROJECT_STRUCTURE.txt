@@ -1,0 +1,5 @@
+StudentSafetySystem/
+├── backend/ (Django + DRF + SQLite)
+├── frontend/ (HTML/CSS/JS dashboard)
+├── hardware/ (RFID/GSM adapter placeholders)
+└── docs/ (architecture)

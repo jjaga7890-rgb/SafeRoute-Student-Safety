@@ -1,0 +1,1 @@
+Student domain module. Student records currently live in core models for this starter.

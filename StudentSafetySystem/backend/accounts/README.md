@@ -1,0 +1,1 @@
+Authentication module placeholder. Add JWT/session authentication and role permissions here for production.
